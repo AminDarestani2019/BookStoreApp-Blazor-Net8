@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStoreApp.API.Data;
 using BookStoreApp.API.Models.Author;
+using BookStoreApp.API.Models.Book;
 using BookStoreApp.API.Static;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +24,12 @@ namespace BookStoreApp.API.Controllers
 
         // GET: api/Authors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AuthorReadOnlyDto>>> GetAuthors()
+        public async Task<ActionResult<IEnumerable<BookReadOnlyDto>>> GetAuthors()
         {
             try
             {
                 var authors = await _context.Authors.ToListAsync();
-                var authorDtos = _mapper.Map<IEnumerable<AuthorReadOnlyDto>>(authors);
+                var authorDtos = _mapper.Map<IEnumerable<BookReadOnlyDto>>(authors);
                 return Ok(authorDtos);
             }
             catch (Exception ex)
@@ -39,9 +40,8 @@ namespace BookStoreApp.API.Controllers
         }
         // GET: api/Authors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AuthorReadOnlyDto>> GetAuthor(int id)
+        public async Task<ActionResult<BookReadOnlyDto>> GetAuthor(int id)
         {
-            throw new Exception("Test");
             try
             {
                 var author = await _context.Authors.FindAsync(id);
@@ -50,7 +50,7 @@ namespace BookStoreApp.API.Controllers
                     _logger.LogWarning($"Record Not Found: {nameof(GetAuthor )} - ID: {id}");
                     return NotFound();
                 }
-                var authorDto = _mapper.Map<AuthorReadOnlyDto>(author);
+                var authorDto = _mapper.Map<BookReadOnlyDto>(author);
                 return Ok(authorDto);
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace BookStoreApp.API.Controllers
         }
         // PUT: api/Authors/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAuthor(int id,AuthorUpdateDto authorDto)
+        public async Task<IActionResult> PutAuthor(int id,BookUpdateDto authorDto)
         {
             if (id != authorDto.Id)
             {
@@ -97,7 +97,7 @@ namespace BookStoreApp.API.Controllers
         }
         // POST: api/Authors
         [HttpPost]
-        public async Task<ActionResult<AuthorCreateDto>> PostAuthor(AuthorCreateDto authorDto)
+        public async Task<ActionResult<BookCreateDto>> PostAuthor(BookCreateDto authorDto)
         {
             try
             {
