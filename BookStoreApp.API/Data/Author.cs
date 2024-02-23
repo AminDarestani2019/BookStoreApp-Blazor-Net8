@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BookStoreApp.API.Data;
+﻿namespace BookStoreApp.API.Data;
 
 public partial class Author
 {
+    public Author()
+    {
+        Books = new HashSet<Book>();
+    }
     public int Id { get; set; }
 
     public string? FirstName { get; set; }
@@ -13,5 +14,5 @@ public partial class Author
 
     public string? Bio { get; set; }
 
-    public virtual ICollection<Book> Books { get; set; } = new List<Book>();
+    public virtual ICollection<Book> Books { get; set; }
 }
