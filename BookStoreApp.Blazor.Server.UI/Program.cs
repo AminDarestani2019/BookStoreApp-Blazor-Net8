@@ -15,6 +15,7 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddHttpClient<IClient,Client>(cl => cl.BaseAddress= new Uri("https://localhost:7084"));
 builder.Services.AddScoped<IAuthenticationService,AuthenticationService>();
 builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 

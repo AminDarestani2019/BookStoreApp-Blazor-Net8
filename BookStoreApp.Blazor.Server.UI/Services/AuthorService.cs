@@ -99,7 +99,6 @@ namespace BookStoreApp.Blazor.Server.UI.Services
             }
             return response;
         }
-
         public async Task<Response<int>> Delete(int Id)
         {
             Response<int> response = new() ;
