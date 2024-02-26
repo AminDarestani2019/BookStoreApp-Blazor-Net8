@@ -16,17 +16,17 @@
 #pragma warning disable 8604 // Disable "CS8604 Possible null reference argument for parameter"
 #pragma warning disable 8625 // Disable "CS8625 Cannot convert null literal to non-nullable reference type"
 
+using BookStoreApp.Blazor.Server.UI.Data;
+using BookStoreApp.Blazor.Server.UI.Models.Author;
+using BookStoreApp.Blazor.Server.UI.Models.Book;
+using BookStoreApp.Blazor.Server.UI.Models.User;
 using Newtonsoft.Json;
 using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Net.Http.Headers;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Runtime.Serialization;
-using BookStoreApp.Blazor.Server.UI.Models.Author;
-using BookStoreApp.Blazor.Server.UI.Models.User;
-using BookStoreApp.Blazor.Server.UI.Models.Book;
+using System.Text;
 
 namespace BookStoreApp.Blazor.Server.UI.Services.Base
 {
@@ -680,6 +680,7 @@ namespace BookStoreApp.Blazor.Server.UI.Services.Base
                 
                     // Operation Path: "api/Authors/{Id}"
                     urlBuilder_.Append("api/Authors/");
+                    urlBuilder_.Append(Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1237,56 +1238,6 @@ namespace BookStoreApp.Blazor.Server.UI.Services.Base
         }
     }
     [GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Author
-    {
-        [JsonProperty("id", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int Id { get; set; }
-
-        [JsonProperty("firstName", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string FirstName { get; set; }
-
-        [JsonProperty("lastName", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string LastName { get; set; }
-
-        [JsonProperty("bio", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string Bio { get; set; }
-
-        [JsonProperty("books", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public ICollection<Book> Books { get; set; }
-
-    }
-    [GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class Book
-    {
-        [JsonProperty("id", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public int Id { get; set; }
-
-        [JsonProperty("title", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string Title { get; set; }
-
-        [JsonProperty("year", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public int? Year { get; set; }
-
-        [JsonProperty("isbn", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string Isbn { get; set; }
-
-        [JsonProperty("summary", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string Summary { get; set; }
-
-        [JsonProperty("image", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public string Image { get; set; }
-
-        [JsonProperty("price", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public double? Price { get; set; }
-
-        [JsonProperty("authorId", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
-        public int? AuthorId { get; set; }
-
-        [JsonProperty("author", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
-        public Author Author { get; set; }
-
-    }
-    [GeneratedCode("NJsonSchema", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     internal class DateFormatConverter : Newtonsoft.Json.Converters.IsoDateTimeConverter
     {
         public DateFormatConverter()
@@ -1316,7 +1267,6 @@ namespace BookStoreApp.Blazor.Server.UI.Services.Base
             return string.Format("HTTP Response: \n\n{0}\n\n{1}", Response, base.ToString());
         }
     }
-
     [GeneratedCode("NSwag", "14.0.3.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class ApiException<TResult> : ApiException
     {
