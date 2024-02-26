@@ -1,4 +1,4 @@
-﻿using BookStoreApp.Blazor.Server.UI.Services.Base;
+﻿using BookStoreApp.Blazor.Server.UI.Models.User;
 
 namespace BookStoreApp.Blazor.Server.UI.Services.Authentication
 {
